@@ -220,7 +220,7 @@ export default function App() {
           <footer className="p-4 text-center text-white/80 text-sm">
             <p>{t('app.footer')}</p>
             <div className="flex gap-4 justify-center mt-2">
-              <a href="https://github.com/jdjchelp-jpg/react-christmas-countdown1" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+              <a href="https://github.com/jdjchelp-jpg/react-christmas-countdown2" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
                 GitHub
               </a>
               <a href="https://codepen.io/collection/WQbWVZ" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
