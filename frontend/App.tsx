@@ -94,18 +94,22 @@ export default function App() {
       const month = now.getMonth();
       const day = now.getDate();
       const hours = now.getHours();
-      const minutes = now.getMinutes();
       
-      if (month === 11 && day === 24 && hours === 00 && minutes === 00) {
+      if (month === 11 && day >= 24) {
         setIsChristmasEve(true);
         
-        const totalSeconds = 60;
-        const secondsElapsed = now.getSeconds();
-        const progress = (secondsElapsed / totalSeconds) * 100;
-        setTreeProgress(progress);
-      } else if (month === 11 && day === 24) {
-        setIsChristmasEve(true);
-        setTreeProgress(0);
+        if (day === 24 && hours === 0) {
+          const totalSeconds = 3600;
+          const minutes = now.getMinutes();
+          const seconds = now.getSeconds();
+          const secondsElapsed = minutes * 60 + seconds;
+          const progress = (secondsElapsed / totalSeconds) * 100;
+          setTreeProgress(progress);
+        } else if (day === 24 && hours > 0) {
+          setTreeProgress(100);
+        } else {
+          setTreeProgress(100);
+        }
       } else {
         setIsChristmasEve(false);
         setTreeProgress(0);
