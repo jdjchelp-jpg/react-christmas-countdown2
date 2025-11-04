@@ -9,7 +9,9 @@
     "minutes": "Minuten",
     "seconds": "Seconden",
     "christmas": "Het is Kerstmis! 🎄",
-    "yearProgress": "Jaarvoortgang naar Kerstmis"
+    "yearProgress": "Jaarvoortgang naar Kerstmis",
+    "daysLeft": "Dagen Over",
+    "yearComplete": "{{percent}}% van het jaar voltooid"
   },
   "settings": {
     "title": "Instellingen",

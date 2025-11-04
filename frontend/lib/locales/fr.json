@@ -9,7 +9,9 @@
     "minutes": "Minutes",
     "seconds": "Secondes",
     "christmas": "C'est Noël ! 🎄",
-    "yearProgress": "Progression de l'Année vers Noël"
+    "yearProgress": "Progression de l'Année vers Noël",
+    "daysLeft": "Jours Restants",
+    "yearComplete": "{{percent}}% de l'année terminée"
   },
   "settings": {
     "title": "Paramètres",
