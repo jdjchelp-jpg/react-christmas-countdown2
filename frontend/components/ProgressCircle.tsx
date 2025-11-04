@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { ColorTheme } from '../lib/themes';
 import { themes } from '../lib/themes';
 
@@ -8,6 +9,7 @@ interface ProgressCircleProps {
 }
 
 export default function ProgressCircle({ selectedYear, theme }: ProgressCircleProps) {
+  const { t } = useTranslation();
   const [progress, setProgress] = useState(0);
   const [daysLeft, setDaysLeft] = useState(0);
 
@@ -82,12 +84,12 @@ export default function ProgressCircle({ selectedYear, theme }: ProgressCirclePr
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <div className="text-4xl font-bold text-white drop-shadow-lg">{daysLeft}</div>
-          <div className="text-sm text-white/80 uppercase tracking-wider">Days Left</div>
+          <div className="text-sm text-white/80 uppercase tracking-wider">{t('countdown.daysLeft')}</div>
         </div>
       </div>
       <div className="text-center">
         <p className="text-white/90 text-sm">
-          {progress.toFixed(1)}% of the year complete
+          {t('countdown.yearComplete', { percent: progress.toFixed(1) })}
         </p>
       </div>
     </div>
