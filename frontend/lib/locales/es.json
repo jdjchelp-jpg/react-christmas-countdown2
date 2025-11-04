@@ -1,0 +1,138 @@
+{
+  "app": {
+    "title": "Cuenta Regresiva de Navidad",
+    "footer": "¡Te deseamos una temporada mágica! ✨"
+  },
+  "countdown": {
+    "days": "Días",
+    "hours": "Horas",
+    "minutes": "Minutos",
+    "seconds": "Segundos",
+    "christmas": "¡Es Navidad! 🎄",
+    "yearProgress": "Progreso del Año a Navidad"
+  },
+  "settings": {
+    "title": "Configuración",
+    "description": "Personaliza tu experiencia de cuenta regresiva",
+    "colorTheme": "Tema de Color",
+    "snowIntensity": "Intensidad de Nieve",
+    "musicVolume": "Volumen de Música",
+    "customMusic": "URL de Música Personalizada",
+    "customMusicPlaceholder": "Pega el enlace de audio de JukeHost aquí...",
+    "customMusicHelp": "Sube tu audio a JukeHost.co.uk y pega el enlace directo aquí",
+    "language": "Idioma",
+    "notifications": "Notificaciones"
+  },
+  "themes": {
+    "classic": "Rojo y Verde Clásico",
+    "winter": "Azul y Blanco Invernal",
+    "royal": "Púrpura y Oro Real",
+    "candy": "Rosa y Rojo Dulce",
+    "golden": "Elegancia Dorada",
+    "icy": "Escarcha Helada",
+    "forest": "Verde Bosque",
+    "sunset": "Resplandor del Atardecer",
+    "aurora": "Aurora Boreal"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "nl": "Nederlands"
+  },
+  "notifications": {
+    "title": "Notificaciones Push",
+    "enabled": "Activado",
+    "disabled": "Desactivado",
+    "blocked": "Las notificaciones están bloqueadas. Actívalas en la configuración de tu navegador.",
+    "oneWeekLabel": "1 Semana Antes",
+    "oneWeekDefault": "🎄 ¡Solo falta 1 semana para Navidad!",
+    "threeDaysLabel": "3 Días Antes",
+    "threeDaysDefault": "🎅 ¡Solo quedan 3 días para Navidad!",
+    "oneDayLabel": "1 Día Antes",
+    "oneDayDefault": "🎁 ¡Mañana es Navidad!"
+  },
+  "games": {
+    "title": "Mini-Juegos de Navidad",
+    "subtitle": "¡Los juegos se desbloquean a medida que se acerca la Navidad!",
+    "playNow": "Jugar Ahora",
+    "backToGames": "← Volver a Juegos",
+    "locked": "Bloqueado",
+    "unlocksIn": "Se desbloquea en {{days}} días",
+    "memory": {
+      "name": "Juego de Memoria GIF",
+      "description": "Empareja pares de emojis navideños",
+      "moves": "Movimientos",
+      "pairs": "Pares",
+      "congratulations": "🎉 ¡Felicitaciones!",
+      "completedIn": "¡Completaste el juego en {{moves}} movimientos!",
+      "score": "Puntuación: {{score}}",
+      "newGame": "Nuevo Juego"
+    },
+    "snowflakes": {
+      "name": "Atrapa los Copos de Nieve",
+      "description": "Haz clic en los copos de nieve que caen para ganar puntos",
+      "score": "Puntuación",
+      "time": "Tiempo",
+      "gameOver": "¡Juego Terminado!",
+      "finalScore": "Puntuación Final: {{score}}",
+      "highScore": "Puntuación Máxima: {{score}}",
+      "startGame": "Iniciar Juego",
+      "playing": "Jugando..."
+    },
+    "decorate": {
+      "name": "Decora el Árbol",
+      "description": "Arrastra y suelta adornos en el árbol",
+      "score": "Puntuación",
+      "ornaments": "Adornos",
+      "clickToPlace": "Haz clic en el árbol para colocar {{ornament}}",
+      "clearTree": "Limpiar Árbol",
+      "saveTree": "Guardar Árbol",
+      "treeSaved": "¡Árbol guardado! Puntuación: {{score}}"
+    },
+    "sleigh": {
+      "name": "Paseo en Trineo de Santa",
+      "description": "Ayuda a Santa a evitar obstáculos",
+      "score": "Puntuación",
+      "high": "Máxima",
+      "crash": "¡Choque!",
+      "finalScore": "Puntuación Final: {{score}}",
+      "instructions": "Usa las teclas ↑ y ↓ para mover a Santa",
+      "startGame": "Iniciar Juego",
+      "playing": "Jugando..."
+    },
+    "stack": {
+      "name": "Apila Bastones de Caramelo",
+      "description": "Apila bastones de caramelo lo más alto que puedas",
+      "stack": "Pila",
+      "high": "Máxima",
+      "collapsed": "¡Pila Colapsada!",
+      "finalHeight": "Altura Final: {{height}}",
+      "score": "Puntuación: {{score}}",
+      "instructions": "Haz clic o presiona Espacio para soltar el bastón de caramelo",
+      "startGame": "Iniciar Juego",
+      "drop": "Soltar",
+      "playing": "Jugando..."
+    },
+    "snowman": {
+      "name": "Construye un Muñeco de Nieve",
+      "description": "Arrastra y suelta partes para construir tu muñeco de nieve",
+      "score": "Puntuación",
+      "partsPlaced": "Partes Colocadas",
+      "availableParts": "Partes Disponibles",
+      "selectPart": "Selecciona una parte de la derecha",
+      "clickToPlace": "Haz clic para colocar {{part}}",
+      "congratulations": "🎉 ¡Muñeco de Nieve Completo!",
+      "finalScore": "Puntuación Final: {{score}}",
+      "resetSnowman": "Reiniciar Muñeco de Nieve"
+    }
+  },
+  "quotes": {
+    "loading": "Cargando frase..."
+  },
+  "menu": {
+    "year": "Año",
+    "settings": "Configuración",
+    "games": "Juegos"
+  }
+}
