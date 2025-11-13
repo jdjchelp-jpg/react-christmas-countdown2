@@ -11,6 +11,26 @@ export interface AppSettings {
     threeDays: string;
     oneDay: string;
   };
+  timezone?: string;
+  targetDate?: string;
+  targetEventName?: string;
+  miniMode?: boolean;
+  reducedMotion?: boolean;
+  colorBlindMode?: 'none' | 'protanopia' | 'deuteranopia' | 'tritanopia';
+  accessibilityMode?: boolean;
+  highContrast?: boolean;
+  largeText?: boolean;
+  fontWeight?: number;
+  lineSpacing?: number;
+  dyslexiaFont?: boolean;
+  magnifierMode?: boolean;
+  textToSpeech?: boolean;
+  ttsVoice?: string;
+  hapticFeedback?: boolean;
+  shapesOnlyMode?: boolean;
+  uiScale?: number;
+  audioAlerts?: boolean;
+  audioAlertFrequency?: number;
 }
 
 export interface GameScore {

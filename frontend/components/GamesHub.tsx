@@ -9,6 +9,9 @@ import DecorateTreeGame from './games/DecorateTreeGame';
 import SantaSleighRide from './games/SantaSleighRide';
 import CandyCaneStack from './games/CandyCaneStack';
 import BuildSnowman from './games/BuildSnowman';
+import GiftWrapper from './games/GiftWrapper';
+import ElfWorkshop from './games/ElfWorkshop';
+import SnowmanBuilder from './games/SnowmanBuilder';
 
 interface Game {
   id: string;
@@ -60,6 +63,27 @@ const GAMES: Game[] = [
     description: 'Stack candy canes as high as you can',
     unlockDays: 5,
     component: CandyCaneStack
+  },
+  {
+    id: 'giftwrapper',
+    name: 'Gift Wrapper',
+    description: 'Design and wrap beautiful presents',
+    unlockDays: 30,
+    component: GiftWrapper
+  },
+  {
+    id: 'elfworkshop',
+    name: 'Elf Workshop',
+    description: 'Click to make toys and upgrade your workshop',
+    unlockDays: 30,
+    component: ElfWorkshop
+  },
+  {
+    id: 'snowmanbuilder',
+    name: 'Snowman Builder Pro',
+    description: 'Build detailed snowmen step by step',
+    unlockDays: 30,
+    component: SnowmanBuilder
   }
 ];
 

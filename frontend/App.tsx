@@ -14,10 +14,16 @@ import MusicPlayer from './components/MusicPlayer';
 import MenuButton from './components/MenuButton';
 import ChristmasTree from './components/ChristmasTree';
 import GamesHub from './components/GamesHub';
+import GiftPlanner from './components/GiftPlanner';
+import WeatherSnapshot from './components/WeatherSnapshot';
+import HourlyProgressRing from './components/HourlyProgressRing';
+import MiniMode from './components/MiniMode';
 import type { ColorTheme } from './lib/themes';
 import { themes } from './lib/themes';
 import { loadSettings, saveSettings } from './lib/storage';
 import { registerServiceWorker, checkAndScheduleNotifications } from './lib/notifications';
+import { ColorBlindFilters } from './lib/accessibility';
+import { getSystemTimezone } from './lib/timezone';
 
 export default function App() {
   const { t } = useTranslation();
@@ -36,6 +42,26 @@ export default function App() {
       oneDay: ''
     }
   );
+  const [timezone, setTimezone] = useState(settings.timezone || 'auto');
+  const [targetDate, setTargetDate] = useState(settings.targetDate || '');
+  const [targetEventName, setTargetEventName] = useState(settings.targetEventName || '');
+  const [miniMode, setMiniMode] = useState(settings.miniMode ?? false);
+  const [reducedMotion, setReducedMotion] = useState(settings.reducedMotion ?? false);
+  const [colorBlindMode, setColorBlindMode] = useState<'none' | 'protanopia' | 'deuteranopia' | 'tritanopia'>(
+    (settings.colorBlindMode as 'none' | 'protanopia' | 'deuteranopia' | 'tritanopia') || 'none'
+  );
+  const [accessibilityMode, setAccessibilityMode] = useState(settings.accessibilityMode ?? false);
+  const [highContrast, setHighContrast] = useState(settings.highContrast ?? false);
+  const [largeText, setLargeText] = useState(settings.largeText ?? false);
+  const [fontWeight, setFontWeight] = useState(settings.fontWeight ?? 400);
+  const [lineSpacing, setLineSpacing] = useState(settings.lineSpacing ?? 1.5);
+  const [dyslexiaFont, setDyslexiaFont] = useState(settings.dyslexiaFont ?? false);
+  const [magnifierMode, setMagnifierMode] = useState(settings.magnifierMode ?? false);
+  const [textToSpeech, setTextToSpeech] = useState(settings.textToSpeech ?? false);
+  const [hapticFeedback, setHapticFeedback] = useState(settings.hapticFeedback ?? false);
+  const [uiScale, setUiScale] = useState(settings.uiScale ?? 1);
+  const [audioAlerts, setAudioAlerts] = useState(settings.audioAlerts ?? false);
+
   const [showSettings, setShowSettings] = useState(false);
   const [showGames, setShowGames] = useState(false);
   const [isChristmas, setIsChristmas] = useState(false);
@@ -46,6 +72,7 @@ export default function App() {
   const [isMobile, setIsMobile] = useState(false);
 
   const theme = themes[selectedTheme];
+  const effectiveTimezone = timezone === 'auto' ? getSystemTimezone() : timezone;
 
   useEffect(() => {
     const checkMobile = () => {
@@ -68,9 +95,32 @@ export default function App() {
       musicVolume,
       customMusicUrl,
       notificationsEnabled,
-      customNotificationMessages
+      customNotificationMessages,
+      timezone,
+      targetDate,
+      targetEventName,
+      miniMode,
+      reducedMotion,
+      colorBlindMode,
+      accessibilityMode,
+      highContrast,
+      largeText,
+      fontWeight,
+      lineSpacing,
+      dyslexiaFont,
+      magnifierMode,
+      textToSpeech,
+      hapticFeedback,
+      uiScale,
+      audioAlerts,
     });
-  }, [selectedYear, selectedTheme, snowIntensity, musicVolume, customMusicUrl, notificationsEnabled, customNotificationMessages]);
+  }, [
+    selectedYear, selectedTheme, snowIntensity, musicVolume, customMusicUrl, 
+    notificationsEnabled, customNotificationMessages, timezone, targetDate,
+    targetEventName, miniMode, reducedMotion, colorBlindMode, accessibilityMode,
+    highContrast, largeText, fontWeight, lineSpacing, dyslexiaFont, magnifierMode,
+    textToSpeech, hapticFeedback, uiScale, audioAlerts
+  ]);
 
   useEffect(() => {
     const calculateDaysUntilChristmas = () => {
@@ -142,15 +192,24 @@ export default function App() {
     setSelectedYear(year);
   };
 
+  const appStyle: React.CSSProperties = {
+    fontWeight: accessibilityMode ? fontWeight : undefined,
+    lineHeight: accessibilityMode ? lineSpacing : undefined,
+  };
+
   return (
-    <div className="dark min-h-screen relative overflow-hidden">
+    <div className="dark min-h-screen relative overflow-hidden" style={appStyle}>
+      <ColorBlindFilters />
       <div
         className={`min-h-screen transition-all duration-1000 ${theme.gradient}`}
+        style={{
+          filter: colorBlindMode !== 'none' ? `url(#${colorBlindMode}-filter)` : undefined,
+        }}
       >
-        <Snowfall intensity={snowIntensity} theme={selectedTheme} />
-        <Sparkles theme={selectedTheme} />
-        <SantaSleigh />
-        {isChristmas && <ConfettiEffect />}
+        {!reducedMotion && snowIntensity > 0 && <Snowfall intensity={snowIntensity} theme={selectedTheme} />}
+        {!reducedMotion && <Sparkles theme={selectedTheme} />}
+        {!reducedMotion && <SantaSleigh />}
+        {isChristmas && !reducedMotion && <ConfettiEffect />}
 
         <div className="relative z-10 min-h-screen flex flex-col">
           <header className="p-4 flex justify-between items-center">
@@ -175,6 +234,11 @@ export default function App() {
               <>
                 <HolidayQuotes />
 
+                <div className="w-full max-w-6xl flex flex-wrap items-start justify-center gap-6">
+                  {!isMobile && <HourlyProgressRing />}
+                  {!isMobile && <WeatherSnapshot />}
+                </div>
+
                 {isChristmasEve ? (
                   <div className="w-full max-w-6xl flex flex-col lg:flex-row items-center justify-center gap-8">
                     {!isMobile && (
@@ -189,6 +253,19 @@ export default function App() {
                         theme={selectedTheme}
                         onYearChange={handleYearChange}
                         isMobile={isMobile}
+                        timezone={effectiveTimezone}
+                        targetDate={targetDate}
+                        targetEventName={targetEventName}
+                        textToSpeech={textToSpeech}
+                        magnifierMode={magnifierMode}
+                        hapticFeedback={hapticFeedback}
+                        reducedMotion={reducedMotion}
+                        largeText={largeText}
+                        highContrast={highContrast}
+                        fontWeight={fontWeight}
+                        lineSpacing={lineSpacing}
+                        dyslexiaFont={dyslexiaFont}
+                        uiScale={uiScale}
                       />
                       {treeProgress > 0 && !isMobile && (
                         <div className="mt-4 text-center">
@@ -208,9 +285,26 @@ export default function App() {
                       theme={selectedTheme}
                       onYearChange={handleYearChange}
                       isMobile={isMobile}
+                      timezone={effectiveTimezone}
+                      targetDate={targetDate}
+                      targetEventName={targetEventName}
+                      textToSpeech={textToSpeech}
+                      magnifierMode={magnifierMode}
+                      hapticFeedback={hapticFeedback}
+                      reducedMotion={reducedMotion}
+                      largeText={largeText}
+                      highContrast={highContrast}
+                      fontWeight={fontWeight}
+                      lineSpacing={lineSpacing}
+                      dyslexiaFont={dyslexiaFont}
+                      uiScale={uiScale}
                     />
                   </div>
                 )}
+
+                <div className="w-full max-w-6xl flex flex-wrap items-start justify-center gap-6">
+                  {!isMobile && <GiftPlanner />}
+                </div>
 
                 {!isMobile && <GiftBoxes />}
               </>
@@ -245,7 +339,43 @@ export default function App() {
           onNotificationsEnabledChange={setNotificationsEnabled}
           customNotificationMessages={customNotificationMessages}
           onCustomNotificationMessagesChange={setCustomNotificationMessages}
+          timezone={timezone}
+          onTimezoneChange={setTimezone}
+          targetDate={targetDate}
+          onTargetDateChange={setTargetDate}
+          targetEventName={targetEventName}
+          onTargetEventNameChange={setTargetEventName}
+          miniMode={miniMode}
+          onMiniModeChange={setMiniMode}
+          reducedMotion={reducedMotion}
+          onReducedMotionChange={setReducedMotion}
+          colorBlindMode={colorBlindMode}
+          onColorBlindModeChange={(mode) => setColorBlindMode(mode as 'none' | 'protanopia' | 'deuteranopia' | 'tritanopia')}
+          accessibilityMode={accessibilityMode}
+          onAccessibilityModeChange={setAccessibilityMode}
+          highContrast={highContrast}
+          onHighContrastChange={setHighContrast}
+          largeText={largeText}
+          onLargeTextChange={setLargeText}
+          fontWeight={fontWeight}
+          onFontWeightChange={setFontWeight}
+          lineSpacing={lineSpacing}
+          onLineSpacingChange={setLineSpacing}
+          dyslexiaFont={dyslexiaFont}
+          onDyslexiaFontChange={setDyslexiaFont}
+          magnifierMode={magnifierMode}
+          onMagnifierModeChange={setMagnifierMode}
+          textToSpeech={textToSpeech}
+          onTextToSpeechChange={setTextToSpeech}
+          hapticFeedback={hapticFeedback}
+          onHapticFeedbackChange={setHapticFeedback}
+          uiScale={uiScale}
+          onUiScaleChange={setUiScale}
+          audioAlerts={audioAlerts}
+          onAudioAlertsChange={setAudioAlerts}
         />
+
+        {miniMode && <MiniMode selectedYear={selectedYear} onToggle={() => setMiniMode(false)} />}
 
         <MusicPlayer 
           volume={musicVolume} 
